@@ -6,7 +6,7 @@
 variables:
   BuildDirectory: '$(Build.SourcesDirectory)/logstash-input-azure_event_hubs'
   LS_HOME: '$(Build.SourcesDirectory)/logstash'
-  pluginVersion: '1.5.0'
+  pluginVersion: '1.5.1'
 
 resources:
   repositories:
