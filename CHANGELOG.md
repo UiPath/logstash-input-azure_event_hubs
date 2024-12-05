@@ -1,4 +1,4 @@
-## 1.5.0 uipath fork
+## 1.5.1 uipath fork
   - do not write checkpoints after each batch based on a new configuration setting CheckpointEachBatch
 
 ## 1.5.0
