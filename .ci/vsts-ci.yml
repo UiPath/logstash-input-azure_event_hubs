@@ -8,11 +8,17 @@ variables:
   LS_HOME: '$(Build.SourcesDirectory)/logstash'
   pluginVersion: '1.5.2'
 
+parameters:
+  LogstashVersion:
+    type: string
+    default: '8.18'
+    displayName: 'Logstash Version'
+
 resources:
   repositories:
   - repository: logstash # The name used to reference this repository in the checkout step
     type: github
-    ref: refs/heads/$(Logstash.Version)
+    ref: refs/heads/${{ parameters.LogstashVersion }}
     endpoint: UiPath
     name: elastic/logstash
 
@@ -70,7 +76,7 @@ steps:
       command: publish
       publishDirectory: '$(BuildDirectory)/package'
       vstsFeedPublish: 'UiPath-DevPackages'
-      vstsFeedPackagePublish: 'logstash-$(Logstash.Version)-input-event-hubs-uipath'
+      vstsFeedPackagePublish: 'logstash-${{ parameters.LogstashVersion }}-input-event-hubs-uipath'
       versionOption: custom
       versionPublish: $(pluginVersion)
       packagePublishDescription: 'Input plugin for Logstash - reads event hub messages from Azure Event Hubs'
