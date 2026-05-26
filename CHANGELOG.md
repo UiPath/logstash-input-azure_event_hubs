@@ -1,3 +1,6 @@
+## 1.5.7
+  - Upgrades `jackson.core` to 2.21.2 and `nimbus-jose-jwt` to 10.9 versions. [#117](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/117)
+
 ## 1.5.6
   - [DOCS] Added recommendation to migrate to the Kafka integration plugin [#116](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/116)
 
