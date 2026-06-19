@@ -6,7 +6,10 @@
 variables:
   BuildDirectory: '$(Build.SourcesDirectory)/logstash-input-azure_event_hubs'
   LS_HOME: '$(Build.SourcesDirectory)/logstash'
-  pluginVersion: '1.5.3'
+  # pluginVersion is resolved at runtime from the VERSION file (see the
+  # "Resolve plugin version" step below):
+  #   main            -> <VERSION>            (e.g. 1.5.7)
+  #   other branches  -> <VERSION>-<BuildId>  (unique prerelease, avoids feed collisions on PR builds)
 
 resources:
   repositories:
@@ -25,6 +28,22 @@ pool:
 steps:
   - checkout: self
   - checkout: logstash
+
+  - bash: |
+      read -r VERSION < "$BUILDDIRECTORY/VERSION" || true
+      VERSION="${VERSION%$'\r'}"
+      if [ -z "$VERSION" ]; then
+        echo "##vso[task.logissue type=error]Could not read a version from $BUILDDIRECTORY/VERSION"
+        exit 1
+      fi
+      if [ "$BUILD_SOURCEBRANCH" = "refs/heads/main" ]; then
+        PLUGIN_VERSION="$VERSION"
+      else
+        PLUGIN_VERSION="${VERSION}-${BUILD_BUILDID}"
+      fi
+      echo "Resolved pluginVersion=$PLUGIN_VERSION (VERSION=$VERSION, branch=$BUILD_SOURCEBRANCH)"
+      echo "##vso[task.setvariable variable=pluginVersion]$PLUGIN_VERSION"
+    displayName: "Resolve plugin version from VERSION file"
 
   - script: mkdir $(BuildDirectory)/package
     displayName: "Create the package folder"
