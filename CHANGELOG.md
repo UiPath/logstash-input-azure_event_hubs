@@ -1,5 +1,28 @@
-## 1.5.1 uipath fork
+## 1.5.7 uipath fork
+  - Synced with upstream `logstash-plugins` v1.5.7 (dependency upgrades + removal of unused `adal4j`)
   - do not write checkpoints after each batch based on a new configuration setting CheckpointEachBatch
+
+## 1.5.7
+  - Upgrades `jackson.core` to 2.21.2 and `nimbus-jose-jwt` to 10.9 versions. [#117](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/117)
+
+## 1.5.6
+  - [DOCS] Added recommendation to migrate to the Kafka integration plugin [#116](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/116)
+
+## 1.5.5
+  - Upgrades kotlin-stdlib dependency [#114](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/114)
+
+## 1.5.4
+  - Ensure full jar-dependency tree is shipped with gem artifact [#110](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/110)
+  - Remove unused `adal4j` dependency [#107](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/107)
+
+## 1.5.3
+  - Fix: With `config_mode => 'advanced'`, event hub-specific settings (`initial_position`, `max_batch_size`, `prefetch_count`, `receive_timeout`, `initial_position_look_back`) were being ignored and replaced with global defaults. These settings are now correctly applied per event hub [#104](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/104)
+
+## 1.5.2
+  - Updated JWT dependency [#101](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/101)
+
+## 1.5.1
+  - Updated multiple Java dependencies [#99](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/99)
 
 ## 1.5.0
   - Updated Azure Event Hub client library to version 3.3.0 [#96](https://github.com/logstash-plugins/logstash-input-azure_event_hubs/pull/96)
